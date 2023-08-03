@@ -1,0 +1,18 @@
+plugins {
+    id "com.github.node-gradle.node" version "3.5.1"
+}
+
+node {
+    download = true
+    version = "18.16.0"
+    distBaseUrl = "https://nodejs.org/dist"
+}
+
+task npmBuildTask(type: NpmTask) {
+    dependsOn npmInstall
+//    npmCommand = ['ng']
+    args = ['run', 'build']
+    inputs.files('package.json', 'package-lock.json', 'vite.config.json')
+    inputs.dir('src')
+    inputs.dir(fileTree("node_modules").exclude(".cache"))
+}

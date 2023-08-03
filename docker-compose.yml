@@ -1,0 +1,25 @@
+version: '3'
+services:
+  database:
+    image: "postgres"
+    environment:
+      - POSTGRES_USER=
+      - POSTGRES_PASSWORD=
+      - POSTGRES_DB=
+    volumes:
+      - ~/Desktop/database-dev:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+  generator:
+    image: "sbom-generators-jar"
+    privileged: true
+    environment:
+      - GENERATOR_BASEDIR=/app/basedir
+      - THREADPOOL_SIZE=4
+      - DEFAULT_TIMEOUT=300
+      - DB_USER=
+      - DB_PASSWORD=
+      - DB_URL=
+    volumes:
+      - /home/mariuxdeangelo/Desktop/generators:/app/basedir
+      - /var/run/docker.sock:/var/run/docker.sock

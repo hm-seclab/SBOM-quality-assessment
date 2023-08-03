@@ -1,0 +1,20 @@
+version: '3'
+services:
+  database:
+    image: "postgres"
+    environment:
+      - POSTGRES_USER=
+      - POSTGRES_PASSWORD=
+      - POSTGRES_DB=
+    volumes:
+      - ~/Desktop/database-dev:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+  backend:
+    image: "sbom-backend"
+    environment:
+        - DB_USER=
+        - DB_PASSWORD=
+        - DB_URL=
+    ports:
+      - 80:8080

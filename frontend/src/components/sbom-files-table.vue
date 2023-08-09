@@ -61,7 +61,7 @@ const filters = ref({global: {value: null, matchMode: FilterMatchMode.CONTAINS}}
       <p-column>
         <template #body="slotProps">
           <div class="flex justify-content-end">
-            <router-link :to="'sbom-insights?sbom_file_id=' + slotProps.data.sbom_file_id">
+            <router-link :to="'/sbom-insights?sbom_file_id=' + slotProps.data.sbom_file_id">
               <p-button label="Details" rounded outlined/>
             </router-link>
           </div>

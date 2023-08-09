@@ -109,32 +109,6 @@ public class DatabaseViewDAO extends AbstractPostgresDAO {
         return jdbcTemplate.query(sql, new RowMapperDependencyList(), project_id);
     }
 
-    public List<DependencyListViewModel> retrieveDependencyListByRefLocCompressed(long project_id) {
-        String sql = "SELECT split_part(referenceLocator, '@', 1) as package_name, ARRAY_AGG(DISTINCT result) as generator_list " +
-                "FROM (SELECT LOWER(REPLACE(REPLACE(REPLACE(jsonb_array_elements(package -> 'externalRefs') ->> 'referenceLocator', '-', '_'), '/', '_'), '.', '_')) as referenceLocator, result " +
-                "      FROM (SELECT jsonb_array_elements(spdx -> 'packages') as package, CONCAT(generator, '-', mode) as result " +
-                "            FROM sbom_files " +
-                "            WHERE project_id = ?) as asdf " +
-                "     ) as result_query " +
-                "WHERE referenceLocator not like 'cpe%' " +
-                "GROUP BY package_name " +
-                "ORDER BY package_name";
-        return jdbcTemplate.query(sql, new RowMapperDependencyList(), project_id);
-    }
-
-    public List<DependencyListViewModel> retrieveDependencyListByRefLocVersionCompressed(long project_id) {
-        String sql = "SELECT split_part(referenceLocator, '?', 1) as package_name, ARRAY_AGG(DISTINCT result) as generator_list " +
-                "FROM (SELECT LOWER(REPLACE(REPLACE(REPLACE(jsonb_array_elements(package -> 'externalRefs') ->> 'referenceLocator', '-', '_'), '/', '_'), '.', '_')) as referenceLocator, result " +
-                "      FROM (SELECT jsonb_array_elements(spdx -> 'packages') as package, CONCAT(generator, '-', mode) as result " +
-                "            FROM sbom_files " +
-                "            WHERE project_id = ?) as asdf " +
-                ") as result_query " +
-                "WHERE referenceLocator not like 'cpe%' " +
-                "GROUP BY package_name " +
-                "ORDER BY package_name;";
-        return jdbcTemplate.query(sql, new RowMapperDependencyList(), project_id);
-    }
-
     public List<DependencyListViewModel> retrieveCdxDependencyListByName(long project_id) {
         String sql = "SELECT package ->> 'name' as package_name, ARRAY_AGG(DISTINCT result) as generator_list " +
                      "FROM (SELECT jsonb_array_elements(cdx -> 'components') as package, CONCAT(generator, '-', mode) as result " +

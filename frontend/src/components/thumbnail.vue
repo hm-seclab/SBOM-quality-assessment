@@ -1,6 +1,6 @@
 <script>
   export default {
-    props: ['title', 'map', 'menu']
+    props: ['title', 'map']
   }
 </script>
 
@@ -12,13 +12,6 @@
           <div class="grid" style="height: 100%">
             <div class="col-12 m-2" style="height: 50%">
               <h1 class="thumb-color">{{ title }}</h1>
-            </div>
-            <div v-if="typeof menu != 'undefined'" style="height: 50%; display: flex; justify-content: flex-end; flex-direction: column">
-              <div style="display:inline-flex">
-                <router-link v-for="item of menu" :to="item.to">
-                  <p-button style="vertical-align: bottom; color: whitesmoke" :label="item.label" link size="large"/>
-                </router-link>
-              </div>
             </div>
           </div>
         </div>

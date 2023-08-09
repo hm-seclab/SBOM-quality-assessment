@@ -53,64 +53,30 @@ public class SbomRestController {
         return viewDao.retrieveSbomMetadataByFile(sbom_file_id);
     }
 
-    @GetMapping("getDependencyListByName")
-    public List<DependencyListViewModel> retrieveDependencyListByName(@RequestParam Long project_id) {
-        rateDoc(EndpointType.RETRIEVE_DEPENDENCY_LIST_BY_NAME, project_id);
-        return viewDao.retrieveDependencyListByName(project_id);
-    }
+    @GetMapping("getDependencyList")
+    public List<DependencyListViewModel> retrieveDependencyList(@RequestParam Long project_id, @RequestParam EndpointType type) {
+        rateDoc(type, project_id);
 
-    @GetMapping("getDependencyListByNameVersion")
-    public List<DependencyListViewModel> retrieveDependencyListByNameVersion(@RequestParam Long project_id) {
-        rateDoc(EndpointType.RETRIEVE_DEPENDENCY_LIST_BY_NAME_VERSION, project_id);
-        return viewDao.retrieveDependencyListByNameVersion(project_id);
-    }
-
-    @GetMapping("getDependencyListByRefLocCompressed")
-    public List<DependencyListViewModel> retrieveDependencyListByRefLocCompressed(@RequestParam Long project_id) {
-        rateDoc(EndpointType.RETRIEVE_DEPENDENCY_LIST_BY_REF_LOC_COMPRESSED, project_id);
-        return viewDao.retrieveDependencyListByRefLocCompressed(project_id);
-    }
-
-    @GetMapping("getDependencyListByRefLocCompressedVersion")
-    public List<DependencyListViewModel> retrieveDependencyListByRefLocVersionCompressed(@RequestParam Long project_id) {
-        rateDoc(EndpointType.RETRIEVE_DEPENDENCY_LIST_BY_REF_LOC_VERSION_COMPRESSED, project_id);
-        return viewDao.retrieveDependencyListByRefLocVersionCompressed(project_id);
-    }
-
-    @GetMapping("getDependencyListByRefLoc")
-    public List<DependencyListViewModel> retrieveDependencyListByRefLoc(@RequestParam Long project_id) {
-        rateDoc(EndpointType.RETRIEVE_DEPENDENCY_LIST_BY_REF_LOC, project_id);
-        return viewDao.retrieveDependencyListByRefLoc(project_id);
-    }
-
-    @GetMapping("getDependencyListByRefLocVersion")
-    public List<DependencyListViewModel> retrieveDependencyListByRefLocVersion(@RequestParam Long project_id) {
-        rateDoc(EndpointType.RETRIEVE_DEPENDENCY_LIST_BY_REF_LOC_VERSION, project_id);
-        return viewDao.retrieveDependencyListByRefLocVersion(project_id);
-    }
-
-    @GetMapping("getCdxDependencyListByName")
-    public List<DependencyListViewModel> retrieveCdxDependencyListByName(@RequestParam Long project_id) {
-        rateDoc(EndpointType.RETRIEVE_CDX_DEPENDENCY_LIST_BY_NAME, project_id);
-        return viewDao.retrieveCdxDependencyListByName(project_id);
-    }
-
-    @GetMapping("getCdxDependencyListByNameVersion")
-    public List<DependencyListViewModel> retrieveCdxDependencyListByNameVersion(@RequestParam Long project_id) {
-        rateDoc(EndpointType.RETRIEVE_CDX_DEPENDENCY_LIST_BY_NAME_VERSION, project_id);
-        return viewDao.retrieveCdxDependencyListByNameWithVersion(project_id);
-    }
-
-    @GetMapping("getCdxDependencyListByPurl")
-    public List<DependencyListViewModel> retrieveCdxDependencyListByPurl(@RequestParam Long project_id) {
-        rateDoc(EndpointType.RETRIEVE_CDX_DEPENDENCY_LIST_BY_PURL, project_id);
-        return viewDao.retrieveCdxDependencyListByPurl(project_id);
-    }
-
-    @GetMapping("getCdxDependencyListByPurlVersion")
-    public List<DependencyListViewModel> retrieveCdxDependencyListByPurlVersion(@RequestParam Long project_id) {
-        rateDoc(EndpointType.RETRIEVE_CDX_DEPENDENCY_LIST_BY_PURL_VERSION, project_id);
-        return viewDao.retrieveCdxDependencyListByPurlWithVersion(project_id);
+        switch (type) {
+            case RETRIEVE_DEPENDENCY_LIST_BY_NAME:
+                return viewDao.retrieveDependencyListByName(project_id);
+            case RETRIEVE_DEPENDENCY_LIST_BY_NAME_VERSION:
+                return viewDao.retrieveDependencyListByNameVersion(project_id);
+            case RETRIEVE_DEPENDENCY_LIST_BY_REF_LOC:
+                return viewDao.retrieveDependencyListByRefLoc(project_id);
+            case RETRIEVE_DEPENDENCY_LIST_BY_REF_LOC_VERSION:
+                return viewDao.retrieveDependencyListByRefLocVersion(project_id);
+            case RETRIEVE_CDX_DEPENDENCY_LIST_BY_NAME:
+                return viewDao.retrieveCdxDependencyListByName(project_id);
+            case RETRIEVE_CDX_DEPENDENCY_LIST_BY_NAME_VERSION:
+                return viewDao.retrieveCdxDependencyListByNameWithVersion(project_id);
+            case RETRIEVE_CDX_DEPENDENCY_LIST_BY_PURL:
+                return viewDao.retrieveCdxDependencyListByPurl(project_id);
+            case RETRIEVE_CDX_DEPENDENCY_LIST_BY_PURL_VERSION:
+                return viewDao.retrieveCdxDependencyListByPurlWithVersion(project_id);
+            default:
+                throw new NotAllowedException("The attribute " + type + " is not allowed.");
+        }
     }
 
     @GetMapping("getSpdxInsightsForFile")

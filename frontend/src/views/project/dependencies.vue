@@ -1,47 +1,61 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import {ref, onBeforeMount} from 'vue';
 import { FilterMatchMode } from 'primevue/api';
 import ForcePlot from "@/components/force-plot.vue";
 import {toolLightColor} from "@/utils/global";
+import {retrieveDependencyList, retrieveSbomMetadataByProject} from "@/utils/api";
+import {useRoute} from "vue-router";
 
-const props = defineProps(['endpoint', 'metadata'])
+const route = useRoute()
+const activeTab = ref()
+const dataLoaded = ref(false)
+const plotVisible = ref(false)
+const comparison = ref();
+const metadata = ref();
+const apiReply = ref();
+
+const selectableColumns = ref()
+const selectedColumns = ref()
 
 const filters = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS }
 });
 
-onMounted(() => {
-  props.endpoint().then(response => {
-      let resultlist = []
-      apiReply.value = response
-      response.forEach(responseEntry => {
-        let result = {}
-        result.name = responseEntry.name;
-        resultlist.push(result)
-        for (const meta of props.metadata) {
-          if (!meta.spdx_exists) {
-            continue
-          }
-          let identifier = metaToIdentifyer(meta)
-          if (responseEntry.generator.includes(identifier)) {
-            result[identifier] = true
-          } else {
-            result[identifier] = false
-          }
-        }
-      })
-      comparison.value = resultlist
-      dataLoaded.value = true
-    })
+onBeforeMount(() => {
+  retrieveSbomMetadataByProject(route.params.project_id).then(response => {
+    metadata.value = response
+    selectableColumns.value = metadata.value.filter(col => col.spdx_exists)
+    selectedColumns.value = selectableColumns.value
+  })
+  loadComparision('RETRIEVE_DEPENDENCY_LIST_BY_REF_LOC')
 });
 
-const dataLoaded = ref(false);
-const plotVisible = ref(false)
-const comparison = ref();
-const apiReply = ref();
-
-const selectableColumns = ref(props.metadata.filter(col => col.spdx_exists))
-const selectedColumns = ref(selectableColumns.value)
+function loadComparision(type) {
+  activeTab.value = type
+  dataLoaded.value = false
+  retrieveDependencyList(route.params.project_id, type).then(response => {
+    let resultlist = []
+    apiReply.value = response
+    response.forEach(responseEntry => {
+      let result = {}
+      result.name = responseEntry.name;
+      resultlist.push(result)
+      for (const meta of metadata.value) {
+        if (!meta.spdx_exists) {
+          continue
+        }
+        let identifier = metaToIdentifyer(meta)
+        if (responseEntry.generator.includes(identifier)) {
+          result[identifier] = true
+        } else {
+          result[identifier] = false
+        }
+      }
+    })
+    comparison.value = resultlist
+    dataLoaded.value = true
+  })
+}
 
 function metaToIdentifyer(meta) {
   return meta.generator + '-' + meta.mode
@@ -52,6 +66,43 @@ const onToggle = (val) => {
 </script>
 
 <template>
+  <div class="grid">
+    <div class="col-3">
+      <p-button label="by SPDX Ref" @click="loadComparision('RETRIEVE_DEPENDENCY_LIST_BY_REF_LOC')"
+                class="w-full" :text="activeTab !== 'RETRIEVE_DEPENDENCY_LIST_BY_REF_LOC'"/>
+    </div>
+    <div class="col-3">
+      <p-button label="by SPDX Name" @click="loadComparision('RETRIEVE_DEPENDENCY_LIST_BY_NAME')"
+                class="w-full" :text="activeTab !== 'RETRIEVE_DEPENDENCY_LIST_BY_NAME'"/>
+    </div>
+    <div class="col-3">
+      <p-button label="by SPDX Ref (with version)" @click="loadComparision('RETRIEVE_DEPENDENCY_LIST_BY_REF_LOC_VERSION')"
+                class="w-full" :text="activeTab !== 'RETRIEVE_DEPENDENCY_LIST_BY_REF_LOC_VERSION'"/>
+    </div>
+    <div class="col-3">
+      <p-button label="by SPDX Name (with version)" @click="loadComparision('RETRIEVE_DEPENDENCY_LIST_BY_NAME_VERSION')"
+                class="w-full" :text="activeTab !== 'RETRIEVE_DEPENDENCY_LIST_BY_NAME_VERSION'"/>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="col-3">
+      <p-button label="by CycloneDx Purl" @click="loadComparision('RETRIEVE_CDX_DEPENDENCY_LIST_BY_PURL')"
+                class="w-full" :text="activeTab !== 'RETRIEVE_CDX_DEPENDENCY_LIST_BY_PURL'"/>
+    </div>
+    <div class="col-3">
+      <p-button label="by CycloneDx Name" @click="loadComparision('RETRIEVE_CDX_DEPENDENCY_LIST_BY_NAME')"
+                class="w-full" :text="activeTab !== 'RETRIEVE_CDX_DEPENDENCY_LIST_BY_NAME'"/>
+    </div>
+    <div class="col-3">
+      <p-button label="by CycloneDx Prul (with version)" @click="loadComparision('RETRIEVE_CDX_DEPENDENCY_LIST_BY_PURL_VERSION')"
+                class="w-full" :text="activeTab !== 'RETRIEVE_CDX_DEPENDENCY_LIST_BY_PURL_VERSION'"/>
+    </div>
+    <div class="col-3">
+      <p-button label="by CycloneDx Name (with version)" @click="loadComparision('RETRIEVE_CDX_DEPENDENCY_LIST_BY_NAME_VERSION')"
+                class="w-full" :text="activeTab !== 'RETRIEVE_CDX_DEPENDENCY_LIST_BY_NAME_VERSION'"/>
+    </div>
+  </div>
+
   <div v-if="dataLoaded === false">
     <p-skeleton class="mb-2" height="160px"/>
     <p-skeleton class="mb-2" height="25px"/>
@@ -103,15 +154,15 @@ const onToggle = (val) => {
               <force-plot :metadata="metadata" :data="apiReply"/>
             </p-dialog>
           </div>
-            <p-multiSelect :modelValue="selectedColumns" :options="selectableColumns" optionLabel="generator"
-                           @update:modelValue="onToggle"
-                           display="chip" placeholder="Select Columns" :maxSelectedLabels="3">
-              <template #option="slotProps">
-                <div class="flex align-items-center">
-                  <div>{{ slotProps.option.mode }} {{ slotProps.option.generator }}</div>
-                </div>
-              </template>
-            </p-multiSelect>
+          <p-multiSelect :modelValue="selectedColumns" :options="selectableColumns" optionLabel="generator"
+                         @update:modelValue="onToggle"
+                         display="chip" placeholder="Select Columns" :maxSelectedLabels="3">
+            <template #option="slotProps">
+              <div class="flex align-items-center">
+                <div>{{ slotProps.option.mode }} {{ slotProps.option.generator }}</div>
+              </div>
+            </template>
+          </p-multiSelect>
         </div>
       </template>
       <p-columnGroup type="header">
@@ -158,13 +209,13 @@ const onToggle = (val) => {
             </template>
           </p-column>
         </p-row>
-                <p-row>
-                  <p-column field="name" sortable/>
-                  <p-column v-for="meda of selectedColumns" :colspan="1" sortable
-                            :key="metaToIdentifyer(meda)"
-                            :field="metaToIdentifyer(meda)">
-                  </p-column>
-                </p-row>
+        <p-row>
+          <p-column field="name" sortable/>
+          <p-column v-for="meda of selectedColumns" :colspan="1" sortable
+                    :key="metaToIdentifyer(meda)"
+                    :field="metaToIdentifyer(meda)">
+          </p-column>
+        </p-row>
       </p-columnGroup>
       <p-column field="name">
         <template #body="slotProps">

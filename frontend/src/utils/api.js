@@ -29,53 +29,8 @@ export const retrieveSbomMetadataByFile = async (sbom_file_id) => {
     return retrieveData(endpoint)
 }
 
-export const retrieveDependencyListByName = async (project_id) => {
-    const endpoint = '/api/getDependencyListByName?project_id=' + project_id
-    return retrieveData(endpoint)
-}
-
-export const retrieveDependencyListByNameVersion = async (project_id) => {
-    const endpoint = '/api/getDependencyListByNameVersion?project_id=' + project_id
-    return retrieveData(endpoint)
-}
-
-export const retrieveDependencyListByRefLocCompressed = async (project_id) => {
-    const endpoint = '/api/getDependencyListByRefLocCompressed?project_id=' + project_id
-    return retrieveData(endpoint)
-}
-
-export const retrieveDependencyListByRefLocCompressedVersion = async (project_id) => {
-    const endpoint = '/api/getDependencyListByRefLocCompressedVersion?project_id=' + project_id
-    return retrieveData(endpoint)
-}
-
-export const retrieveDependencyListByRefLoc = async (project_id) => {
-    const endpoint = '/api/getDependencyListByRefLoc?project_id=' + project_id
-    return retrieveData(endpoint)
-}
-
-export const retrieveDependencyListByRefLocVersion = async (project_id) => {
-    const endpoint = '/api/getDependencyListByRefLocVersion?project_id=' + project_id
-    return retrieveData(endpoint)
-}
-
-export const retrieveCdxDependencyListByName = async (project_id) => {
-    const endpoint = '/api/getCdxDependencyListByName?project_id=' + project_id
-    return retrieveData(endpoint)
-}
-
-export const retrieveCdxDependencyListByNameVersion = async (project_id) => {
-    const endpoint = '/api/getCdxDependencyListByNameVersion?project_id=' + project_id
-    return retrieveData(endpoint)
-}
-
-export const retrieveCdxDependencyListByPurl = async (project_id) => {
-    const endpoint = '/api/getCdxDependencyListByPurl?project_id=' + project_id
-    return retrieveData(endpoint)
-}
-
-export const retrieveCdxDependencyListByPurlVersion = async (project_id) => {
-    const endpoint = '/api/getCdxDependencyListByPurlVersion?project_id=' + project_id
+export const retrieveDependencyList = async (project_id, type) => {
+    const endpoint = '/api/getDependencyList?project_id=' + project_id + '&type=' + type
     return retrieveData(endpoint)
 }
 

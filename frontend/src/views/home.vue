@@ -140,7 +140,7 @@ async function fetchSubjectProjects() {
 
         <p-column header="">
           <template #body="slotPros">
-            <router-link :to="'/project-insights?project_id=' + slotPros.data.project_id">
+            <router-link :to="'/project/' + slotPros.data.project_id + '/insights'">
               <p-button label="Details" rounded outlined/>
             </router-link>
           </template>

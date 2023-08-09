@@ -37,7 +37,7 @@ import 'primeflex/primeflex.css';
 
 const app = createApp(App);
 
-// axios.defaults.baseURL = 'http://localhost:8080/'
+axios.defaults.baseURL = 'http://localhost:8080/'
 // axios.defaults.baseURL = 'https://sbom.seclab.cs.hm.edu/'
 
 app.use(BootstrapVue3)

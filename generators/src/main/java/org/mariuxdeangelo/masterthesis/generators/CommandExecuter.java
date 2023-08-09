@@ -17,7 +17,8 @@ public class CommandExecuter {
 
     public static long executeRecorded(String command, Path castOutput, int timeout) {
         logger.info("Outputing protocoll to: {}", castOutput);
-        String wrappedCommand = " xvfb-run --auto-servernum --server-args='-screen 0 1280x720x24' terminator --command=\"asciinema rec --stdin -c=' echo Generator started with command: " + command + " && " + command + " && echo Generator finished ' " + castOutput + "\"";
+//        String wrappedCommand = " xvfb-run --auto-servernum --server-args='-screen 0 1280x720x24' terminator --command=\"asciinema rec --stdin -c=' echo Generator started with command: " + command + " && " + command + " && echo Generator finished ' " + castOutput + "\"";
+        String wrappedCommand = " asciinema rec --stdin -c=' echo Generator started with command: \"" + command + "\" && " + command + " && echo Generator finished ' " + castOutput;
         return execute(wrappedCommand, timeout);
     }
 

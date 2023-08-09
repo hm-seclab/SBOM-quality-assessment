@@ -30,7 +30,7 @@ public class CycloneDxGeneratorRelease extends GeneratorRelease {
         String command = String.format("cdxgen --deep --spec-version 1.4 -r -o %s %s", cdxOutput, getRepository());
         long executionTime = CommandExecuter.executeRecorded(command, castOutput);
 
-        StaticHelper.converteCdx2SpdxWithCdx(cdxOutput.toFile(), spdxOutput.toFile());
+        StaticHelper.convertCdx2Spdx(cdxOutput.toFile(), spdxOutput.toFile());
         SbomFilesModel result = new SbomFilesModel();
         result.setProjectId(getProjectId());
         result.setExecutionTime(executionTime);

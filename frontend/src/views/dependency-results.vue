@@ -4,8 +4,14 @@ import ProjectMetadata from "@/components/project-metadata.vue";
 import DependencyTable from "@/components/dependency-table.vue";
 import SbomFilesTable from "@/components/sbom-files-table.vue";
 import {
-  retrieveDependencyListByName, retrieveDependencyListByNameVersion,
-  retrieveDependencyListByRefLoc, retrieveDependencyListByRefLocCompressedVersion,
+  retrieveCdxDependencyListByName,
+  retrieveCdxDependencyListByNameVersion,
+  retrieveCdxDependencyListByPurl,
+  retrieveCdxDependencyListByPurlVersion,
+  retrieveDependencyListByName,
+  retrieveDependencyListByNameVersion,
+  retrieveDependencyListByRefLoc,
+  retrieveDependencyListByRefLocCompressedVersion,
   retrieveDependencyListByRefLocVersion,
   retrieveSbomMetadata
 } from "@/utils/api";
@@ -34,12 +40,14 @@ export default {
     retrieveDependencyListByRefLocVersion,
     retrieveDependencyListByName,
     retrieveDependencyListByRefLoc,
+    retrieveCdxDependencyListByName,
+    retrieveCdxDependencyListByNameVersion,
+    retrieveCdxDependencyListByPurl,
+    retrieveCdxDependencyListByPurlVersion,
     fetchMetadata() {
       retrieveSbomMetadata().then(response => {
         const project_id = parseInt(this.$route.query.project_id)
         this.metadata = response.filter(x => x.project_id === project_id).sort((x, y) => (x.mode + x.generator).localeCompare(y.mode + y.generator))
-        this.thumb.set('CycloneDx', this.metadata.filter(item => item.cdx_orig == true).length)
-        this.thumb.set('SPDX', this.metadata.filter(item => item.spdx_orig == true).length)
         this.thumb.set('Generators', this.metadata.length)
       })
     },
@@ -107,6 +115,26 @@ export default {
         <b-tab title="by Name (with version)" lazy>
           <KeepAlive>
             <dependency-table :endpoint="() => retrieveDependencyListByNameVersion(this.$route.query.project_id)" :metadata="metadata"/>
+          </KeepAlive>
+        </b-tab>
+        <b-tab title="Cdx by Name" lazy>
+          <KeepAlive>
+            <dependency-table :endpoint="() => retrieveCdxDependencyListByName(this.$route.query.project_id)" :metadata="metadata"/>
+          </KeepAlive>
+        </b-tab>
+        <b-tab title="Cdx by Name (with version)" lazy>
+          <KeepAlive>
+            <dependency-table :endpoint="() => retrieveCdxDependencyListByNameVersion(this.$route.query.project_id)" :metadata="metadata"/>
+          </KeepAlive>
+        </b-tab>
+        <b-tab title="Cdx by Purl" lazy>
+          <KeepAlive>
+            <dependency-table :endpoint="() => retrieveCdxDependencyListByPurl(this.$route.query.project_id)" :metadata="metadata"/>
+          </KeepAlive>
+        </b-tab>
+        <b-tab title="Cdx by Purl (with version)" lazy>
+          <KeepAlive>
+            <dependency-table :endpoint="() => retrieveCdxDependencyListByPurlVersion(this.$route.query.project_id)" :metadata="metadata"/>
           </KeepAlive>
         </b-tab>
       </b-tabs>

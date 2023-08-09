@@ -135,6 +135,48 @@ public class DatabaseViewDAO extends AbstractPostgresDAO {
         return jdbcTemplate.query(sql, new RowMapperDependencyList(), project_id);
     }
 
+    public List<DependencyListViewModel> retrieveCdxDependencyListByName(long project_id) {
+        String sql = "SELECT package ->> 'name' as package_name, ARRAY_AGG(DISTINCT result) as generator_list " +
+                     "FROM (SELECT jsonb_array_elements(cdx -> 'components') as package, CONCAT(generator, '-', mode) as result " +
+                     "      FROM sbom_files " +
+                     "      WHERE project_id = ?) as adsf " +
+                     "GROUP BY package_name " +
+                     "ORDER BY package_name";
+        return jdbcTemplate.query(sql, new RowMapperDependencyList(), project_id);
+    }
+
+    public List<DependencyListViewModel> retrieveCdxDependencyListByNameWithVersion(long project_id) {
+        String sql = "SELECT CONCAT(package ->> 'name', ':', package ->> 'version') as package_name, ARRAY_AGG(DISTINCT result) as generator_list " +
+                     "FROM (SELECT jsonb_array_elements(cdx -> 'components') as package, CONCAT(generator, '-', mode) as result " +
+                     "      FROM sbom_files " +
+                     "      WHERE project_id = ?) as adsf " +
+                     "GROUP BY package_name " +
+                     "ORDER BY package_name";
+        return jdbcTemplate.query(sql, new RowMapperDependencyList(), project_id);
+    }
+
+    public List<DependencyListViewModel> retrieveCdxDependencyListByPurl(long project_id) {
+        String sql = "SELECT SPLIT_PART(package ->> 'purl', '@', 1) as package_name, ARRAY_AGG(DISTINCT result) as generator_list " +
+                     "FROM (SELECT jsonb_array_elements(cdx -> 'components') as package, CONCAT(generator, '-', mode) as result " +
+                     "      FROM sbom_files " +
+                     "      WHERE project_id = ?) as adsf " +
+                     "WHERE package ->> 'purl' is not null " +
+                     "GROUP BY package_name " +
+                     "ORDER BY package_name";
+        return jdbcTemplate.query(sql, new RowMapperDependencyList(), project_id);
+    }
+
+    public List<DependencyListViewModel> retrieveCdxDependencyListByPurlWithVersion(long project_id) {
+        String sql = "SELECT package ->> 'purl' as package_name, ARRAY_AGG(DISTINCT result) as generator_list " +
+                     "FROM (SELECT jsonb_array_elements(cdx -> 'components') as package, CONCAT(generator, '-', mode) as result " +
+                     "      FROM sbom_files " +
+                     "      WHERE project_id = ?) as adsf " +
+                     "WHERE package ->> 'purl' is not null " +
+                     "GROUP BY package_name " +
+                     "ORDER BY package_name";
+        return jdbcTemplate.query(sql, new RowMapperDependencyList(), project_id);
+    }
+
     public List<LicenseListViewModel> retrieveLicenseList(long project_id, String attribute) {
         if (attribute.equals("copyrightText")
                 || attribute.equals("filesAnalyzed")

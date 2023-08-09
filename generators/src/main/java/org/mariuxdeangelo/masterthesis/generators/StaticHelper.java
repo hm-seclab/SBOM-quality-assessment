@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -62,52 +61,60 @@ public class StaticHelper {
         }
     }
 
-    public static long convertSpdx2Cdx(File spdx, File cdx) throws IOException {
-        long time = converteSpdx2CdxWithCdx(spdx, cdx);
-        if (cdx.exists() && (Files.size(cdx.toPath()) > 0)) return time;
+    public static long convertSpdx2Cdx(File spdx, File cdx) {
+        try {
+            long time = convertSpdx2CdxWithCdx(spdx, cdx);
+            if (cdx.exists() && (Files.size(cdx.toPath()) > 0)) return time;
 
-        return converteSpdx2CdxWithSyft(spdx, cdx);
+            return convertSpdx2CdxWithSyft(spdx, cdx);
+        } catch (IOException e) {}
+        return -1;
     }
 
-    public static long convertCdx2Spdx(File cdx, File spdx) throws IOException {
-        converteCdx2SpdxWithSpdx(cdx, spdx);
-        if (cdx.exists() && (Files.size(cdx.toPath()) > 0)) return 0;
+    public static long convertCdx2Spdx(File cdx, File spdx) {
+        try {
+            try {
+                convertCdx2SpdxWithSpdx(cdx, spdx);
+            } catch (Exception ignored) {}
+            if (spdx.exists() && (Files.size(spdx.toPath()) > 0)) return 0;
 
-        long time = converteSpdx2CdxWithCdx(cdx, spdx);
-        if (cdx.exists() && (Files.size(cdx.toPath()) > 0)) return time;
+            long time = convertSpdx2CdxWithCdx(cdx, spdx);
+            if (spdx.exists() && (Files.size(spdx.toPath()) > 0)) return time;
 
-        return converteCdx2SpdxWithSyft(cdx, spdx);
+            return convertCdx2SpdxWithSyft(cdx, spdx);
+        } catch (IOException ignored) {}
+        return -1;
     }
 
-    public static long converteCdx2SpdxWithCdx(File cycloneDx, File spdx) {
+    public static long convertCdx2SpdxWithCdx(File cycloneDx, File spdx) {
         String command = String.format("cyclonedx-cli convert --input-file %s --output-file %s --input-format json --output-format spdxjson", cycloneDx, spdx);
         long executionTime = CommandExecuter.execute(command);
         logger.info("Convertion time: {}", executionTime);
         return executionTime;
     }
 
-    public static long converteSpdx2CdxWithCdx(File spdx, File cycloneDx) {
+    public static long convertSpdx2CdxWithCdx(File spdx, File cycloneDx) {
         String command = String.format("cyclonedx-cli convert --input-file %s --output-file %s --input-format spdxjson --output-format json", spdx , cycloneDx);
         long executionTime = CommandExecuter.execute(command);
         logger.info("Convertion time: {}", executionTime);
         return executionTime;
     }
 
-    public static long converteSpdx2CdxWithSyft(File spdx, File cycloneDx) {
+    public static long convertSpdx2CdxWithSyft(File spdx, File cycloneDx) {
         String command = String.format("syft convert %s -o cyclonedx-json=%s", spdx, cycloneDx);
         long executionTime = CommandExecuter.execute(command);
         logger.info("Convertion time: {}", executionTime);
         return executionTime;
     }
 
-    public static long converteCdx2SpdxWithSyft(File cycloneDx, File spdx) {
+    public static long convertCdx2SpdxWithSyft(File cycloneDx, File spdx) {
         String command = String.format("syft convert %s -o spdx-json=%s", cycloneDx, spdx);
         long executionTime = CommandExecuter.execute(command);
         logger.info("Convertion time: {}", executionTime);
         return executionTime;
     }
 
-    public static File converteCdx2SpdxWithSpdx(File cycloneDx, File spdx) {
+    public static File convertCdx2SpdxWithSpdx(File cycloneDx, File spdx) {
         try (FileOutputStream output = new FileOutputStream(spdx)) {
 
             final Bom cdxBom = BomParserFactory.createParser(cycloneDx).parse(cycloneDx);

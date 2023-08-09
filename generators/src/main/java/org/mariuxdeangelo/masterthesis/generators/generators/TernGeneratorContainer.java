@@ -25,8 +25,9 @@ public class TernGeneratorContainer extends GeneratorContainer {
     public SbomFilesModel generate() {
         String uuid = UUID.randomUUID().toString();
         Path spdxOutput = StaticHelper.createNewSpdxPath(uuid);
+        Path cdxOutput = StaticHelper.createNewCdxPath(uuid);
         Path castOutput = StaticHelper.createNewOutputPathCast(generatorName(), uuid);
-        String command = String.format("/root/.local/bin/tern report -f spdxjson -i %s -o %s", getContainer() + ":latest", spdxOutput);
+        String command = String.format("/root/.local/bin/tern report -f spdxjson -i %s -o %s && /root/.local/bin/tern report -f cyclonedxjson -i %s -o %s", getContainer() + ":latest", spdxOutput, getContainer() + ":latest", cdxOutput);
         long executionTime = CommandExecuter.executeRecorded(command, castOutput);
 
         SbomFilesModel result = new SbomFilesModel();
@@ -38,8 +39,9 @@ public class TernGeneratorContainer extends GeneratorContainer {
         result.setCommand(command);
         result.setShellOutput(StaticHelper.readFileToByteArray(castOutput));
         result.setSpdx(StaticHelper.readJsonFileToString(spdxOutput.toFile()));
+        result.setCdx(StaticHelper.readJsonFileToString(cdxOutput.toFile()));
         result.setOrig_spdx(true);
-        result.setOrig_cdx(false);
+        result.setOrig_cdx(true);
 
         return result;
     }

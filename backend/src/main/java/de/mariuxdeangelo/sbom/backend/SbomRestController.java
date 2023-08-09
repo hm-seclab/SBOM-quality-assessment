@@ -89,6 +89,30 @@ public class SbomRestController {
         return viewDao.retrieveDependencyListByRefLocVersion(project_id);
     }
 
+    @GetMapping("getCdxDependencyListByName")
+    public List<DependencyListViewModel> retrieveCdxDependencyListByName(@RequestParam Long project_id) {
+        rateDoc(EndpointType.RETRIEVE_CDX_DEPENDENCY_LIST_BY_NAME, project_id);
+        return viewDao.retrieveCdxDependencyListByName(project_id);
+    }
+
+    @GetMapping("getCdxDependencyListByNameVersion")
+    public List<DependencyListViewModel> retrieveCdxDependencyListByNameVersion(@RequestParam Long project_id) {
+        rateDoc(EndpointType.RETRIEVE_CDX_DEPENDENCY_LIST_BY_NAME_VERSION, project_id);
+        return viewDao.retrieveCdxDependencyListByNameWithVersion(project_id);
+    }
+
+    @GetMapping("getCdxDependencyListByPurl")
+    public List<DependencyListViewModel> retrieveCdxDependencyListByPurl(@RequestParam Long project_id) {
+        rateDoc(EndpointType.RETRIEVE_CDX_DEPENDENCY_LIST_BY_PURL, project_id);
+        return viewDao.retrieveCdxDependencyListByPurl(project_id);
+    }
+
+    @GetMapping("getCdxDependencyListByPurlVersion")
+    public List<DependencyListViewModel> retrieveCdxDependencyListByPurlVersion(@RequestParam Long project_id) {
+        rateDoc(EndpointType.RETRIEVE_CDX_DEPENDENCY_LIST_BY_PURL_VERSION, project_id);
+        return viewDao.retrieveCdxDependencyListByPurlWithVersion(project_id);
+    }
+
     @GetMapping("getSpdxInsightsForFile")
     public SpdxInsightsModel retrieveSpdxInsightsForFile(@RequestParam Long sbom_file_id) {
         rateDoc(EndpointType.RETRIEVE_SPDX_INSIGHTS_FOR_FILE, sbom_file_id);

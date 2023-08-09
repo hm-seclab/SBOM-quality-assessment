@@ -17,8 +17,6 @@ function fetchMetadata() {
   retrieveSbomMetadata().then(response => {
     const project_id = parseInt(route.query.project_id)
     metadata.value = response.filter(x => x.project_id === project_id).sort((x, y) => (x.mode + x.generator).localeCompare(y.mode + y.generator))
-    thumb.value.set('CycloneDx', metadata.value.filter(item => item.cdx_orig == true).length)
-    thumb.value.set('SPDX', metadata.value.filter(item => item.spdx_orig == true).length)
     thumb.value.set('Generators', metadata.value.length)
     dataLoaded.value = true;
   })

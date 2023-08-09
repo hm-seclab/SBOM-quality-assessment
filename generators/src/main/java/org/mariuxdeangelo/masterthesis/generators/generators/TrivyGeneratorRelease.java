@@ -25,8 +25,9 @@ public class TrivyGeneratorRelease extends GeneratorRelease {
     public SbomFilesModel generate() {
         String uuid = UUID.randomUUID().toString();
         Path spdxOutput = StaticHelper.createNewSpdxPath(uuid);
+        Path cdxOutput = StaticHelper.createNewCdxPath(uuid);
         Path castOutput = StaticHelper.createNewOutputPathCast(generatorName(), uuid);
-        String command = String.format("trivy fs --format spdx-json --output %s %s", spdxOutput, getRepository());
+        String command = String.format("trivy fs --format spdx-json --output %s %s && trivy fs --format cyclonedx --output %s %s", spdxOutput, getRepository(), cdxOutput, getRepository());
         long executionTime = CommandExecuter.executeRecorded(command, castOutput);
 
         SbomFilesModel result = new SbomFilesModel();
@@ -38,8 +39,9 @@ public class TrivyGeneratorRelease extends GeneratorRelease {
         result.setCommand(command);
         result.setShellOutput(StaticHelper.readFileToByteArray(castOutput));
         result.setSpdx(StaticHelper.readJsonFileToString(spdxOutput.toFile()));
+        result.setCdx(StaticHelper.readJsonFileToString(cdxOutput.toFile()));
         result.setOrig_spdx(true);
-        result.setOrig_cdx(false);
+        result.setOrig_cdx(true);
 
         return result;
     }

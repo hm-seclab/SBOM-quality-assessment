@@ -47,7 +47,7 @@ public class ScanCodeGeneratorSources extends GeneratorSources {
                 ObjectNode metadata = (ObjectNode) node.get("metadata");
                 metadata.remove("properties");
                 mapper.writeValue(cdxOutput.toFile(), node);
-                StaticHelper.converteCdx2SpdxWithCdx(cdxOutput.toFile(), spdxOutput.toFile());
+                StaticHelper.convertCdx2Spdx(cdxOutput.toFile(), spdxOutput.toFile());
                 cdxString = node.toPrettyString();
                 spdxString = StaticHelper.readJsonFileToString(spdxOutput.toFile());
 

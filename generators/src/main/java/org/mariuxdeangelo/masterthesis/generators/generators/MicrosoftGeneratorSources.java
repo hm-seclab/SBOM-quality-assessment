@@ -26,12 +26,15 @@ public class MicrosoftGeneratorSources extends GeneratorSources {
         String uuid = UUID.randomUUID().toString();
         Path outputDir = StaticHelper.getOwnWorkDir(uuid);
         Path spdxOutput = StaticHelper.createNewSpdxPath(uuid);
+        Path cdxOutput = StaticHelper.createNewCdxPath(uuid);
         Path castOutput = StaticHelper.createNewOutputPathCast(generatorName(), uuid);
+        outputDir.toFile().mkdirs();
         String command = String.format("sbom-tool generate -b %s -bc %s -pn test -pv 0.0.1 -ps testinstitution -nsb https://demo.org/demo", outputDir, getSources());
         long executionTime = CommandExecuter.executeRecorded(command, castOutput);
 
-        StaticHelper.moveMicrosoftFilesAccordingly(outputDir, spdxOutput);
         SbomFilesModel result = new SbomFilesModel();
+        StaticHelper.moveMicrosoftFilesAccordingly(outputDir, spdxOutput);
+        StaticHelper.convertSpdx2Cdx(spdxOutput.toFile(), cdxOutput.toFile());
         result.setProjectId(getProjectId());
         result.setExecutionTime(executionTime);
         result.setGenerator(generatorName());
@@ -40,6 +43,7 @@ public class MicrosoftGeneratorSources extends GeneratorSources {
         result.setCommand(command);
         result.setShellOutput(StaticHelper.readFileToByteArray(castOutput));
         result.setSpdx(StaticHelper.readJsonFileToString(spdxOutput.toFile()));
+        result.setCdx(StaticHelper.readJsonFileToString(cdxOutput.toFile()));
         result.setOrig_spdx(true);
         result.setOrig_cdx(false);
 

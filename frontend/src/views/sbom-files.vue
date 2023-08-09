@@ -3,6 +3,7 @@ import Thumbnail from "@/components/thumbnail.vue";
 import {onMounted, ref} from "vue";
 import {retrieveSbomMetadata} from "@/utils/api";
 import SbomFilesTable from "@/components/sbom-files-table.vue";
+import Disclamer from "@/components/disclamer.vue";
 
 const data = ref([])
 const thumb = ref(new Map())
@@ -23,6 +24,7 @@ async function fetchSbomMetadata() {
 <template>
   <thumbnail title="SBOM List" :map="thumb"/>
   <div class="container">
+    <disclamer/>
     <sbom-files-table :data="data" class="mt-3"/>
   </div>
 </template>

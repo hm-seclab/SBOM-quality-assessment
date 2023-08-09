@@ -43,7 +43,20 @@ const filters = ref({global: {value: null, matchMode: FilterMatchMode.CONTAINS}}
       </p-column>
 
       <p-column field="totalPackages" header="Packages" sortable/>
-      <p-column field="totalRelationships" header="Relationships" sortable/>
+      <p-column field="totalRelationships" header="Relationships" sortable>
+        <template #body="slotProps">
+          <div class="flex justify-content-between">
+            <p>{{ slotProps.data.totalRelationships }}</p>
+            <div class="flex align-content-center flex-wrap" v-if="slotProps.data.spdx_exists || slotProps.data.cdx_exists">
+              <p-badge value="SPDX" class="m-1" :severity="slotProps.data.spdx_exists ? 'success' : 'warning'"/>
+              <p-badge value="CDX" class="m-1" :severity="slotProps.data.cdx_exists ? 'success' : 'warning'"/>
+            </div>
+            <div v-else>
+              <p-badge value="failed" class="m-1" severity="danger"/>
+            </div>
+          </div>
+        </template>
+      </p-column>
 
       <p-column>
         <template #body="slotProps">

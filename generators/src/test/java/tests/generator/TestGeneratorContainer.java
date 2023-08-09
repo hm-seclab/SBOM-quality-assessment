@@ -24,8 +24,8 @@ public class TestGeneratorContainer extends TestAbstractGenerator {
         Generator generator = new MicrosoftGeneratorContainer(getTestContainerName(), 0);
 
         SbomFilesModel output = generator.generate();
-//        assert output.getCdx() != null;
-//        assert !output.getCdx().isEmpty();
+        assert output.getCdx() != null;
+        assert !output.getCdx().isEmpty();
         assert output.getSpdx() != null;
         assert !output.getSpdx().isEmpty();
         assert output.getShellOutput().length > 0;
@@ -36,8 +36,8 @@ public class TestGeneratorContainer extends TestAbstractGenerator {
         Generator generator = new TrivyGeneratorContainer(getTestContainerName(), 0);
 
         SbomFilesModel output = generator.generate();
-//        assert output.getCdx() != null;
-//        assert !output.getCdx().isEmpty();
+        assert output.getCdx() != null;
+        assert !output.getCdx().isEmpty();
         assert output.getSpdx() != null;
         assert !output.getSpdx().isEmpty();
         assert output.getShellOutput().length > 0;
@@ -60,8 +60,8 @@ public class TestGeneratorContainer extends TestAbstractGenerator {
         Generator generator = new TernGeneratorContainer(getTestContainerName(), 0);
 
         SbomFilesModel output = generator.generate();
-//        assert output.getCdx() != null;
-//        assert !output.getCdx().isEmpty();
+        assert output.getCdx() != null;
+        assert !output.getCdx().isEmpty();
         assert output.getSpdx() != null;
         assert !output.getSpdx().isEmpty();
         assert output.getShellOutput().length > 0;

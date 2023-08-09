@@ -20,9 +20,9 @@
         <b-nav-item>
           <router-link class="navbar-custom-brand" to="/sbom-files">SBOMs</router-link>
         </b-nav-item>
-<!--        <b-nav-item>-->
-<!--          <router-link class="navbar-custom-brand" to="/plots">Plots</router-link>-->
-<!--        </b-nav-item>-->
+        <b-nav-item>
+          <router-link class="navbar-custom-brand" to="/plots">Plots</router-link>
+        </b-nav-item>
         <b-nav-item>
           <router-link class="navbar-custom-brand" to="/about">About</router-link>
         </b-nav-item>

@@ -10,15 +10,17 @@
       return {icon: 'pi pi-question', color: 'bg-gray-100', severity: 'secondary', disabled: true, sbom_file_id: null}
     }
 
-    if (!filter[0].spdx_exists) {
+    if (filter[0].status === 'failed') {
       return {icon: 'pi pi-times', color: 'bg-red-50', severity: 'danger', disabled: false, sbom_file_id: filter[0].sbom_file_id}
     }
 
-    if (filter[0].totalPackages < 10) {
+    if (filter[0].status === 'corrupted') {
       return {icon: 'pi pi-exclamation-triangle', color: 'bg-yellow-50', severity: 'warning', disabled: false, sbom_file_id: filter[0].sbom_file_id}
     }
-
-    return {icon: 'pi pi-check', color: 'bg-green-50', severity: 'success', disabled: false, sbom_file_id: filter[0].sbom_file_id}
+    if (filter[0].status === 'good') {
+      return {icon: 'pi pi-check', color: 'bg-green-50', severity: 'success', disabled: false, sbom_file_id: filter[0].sbom_file_id}
+    }
+    return null;
   }
 
   function navigationToSbomInsights(sbom_file_id) {

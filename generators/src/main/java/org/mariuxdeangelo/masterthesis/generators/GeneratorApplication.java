@@ -47,7 +47,7 @@ public class GeneratorApplication {
             RunnerGenerator generatorRunner = new RunnerGenerator(subject);
             logger.info("Add new Project to ExecuterService: {} {}", subject.getName(), subject.getProjectId());
 
-            // First run is for initialisation of Scanners
+//             First run is for initialisation of Scanners
             if (isFirst) {
                 futures.add(threadPool.submit(generatorRunner));
             } else {

@@ -35,26 +35,30 @@ public class GithubGeneratorSources extends GeneratorSources {
 
     @Override
     public SbomFilesModel generate() {
-        Path output = StaticHelper.createNewSpdxPath(UUID.randomUUID().toString());
+        String uuid = UUID.randomUUID().toString();
+        Path spdxOutput = StaticHelper.createNewSpdxPath(uuid);
+        Path cdxOutput = StaticHelper.createNewCdxPath(uuid);
         String apiUrl = url.replace("https://github.com/", "https://api.github.com/repos/") +
                 "/dependency-graph/sbom";
 
         try {
             Map<String, String> header = new HashMap<>();
             header.put("Authorization", "Bearer " + GeneratorAppConfig.getGitToken());
-            JsonNode jsonNode = StaticHelper.httpGetJsonRequest(apiUrl, header);
+            JsonNode jsonNode = StaticHelper.httpGetJsonRequest(apiUrl);
 
             if (jsonNode != null) {
-                FileWriter fileWriter = new FileWriter(output.toFile());
+                FileWriter fileWriter = new FileWriter(spdxOutput.toFile());
                 fileWriter.write(jsonNode.get("sbom").toPrettyString());
                 fileWriter.close();
+                StaticHelper.convertSpdx2Cdx(spdxOutput.toFile(), cdxOutput.toFile());
 
                 SbomFilesModel result = new SbomFilesModel();
                 result.setProjectId(getProjectId());
                 result.setGenerator(generatorName());
                 result.setMode(generatorMode());
                 result.setTimestamp(Timestamp.valueOf(LocalDateTime.now()));
-                result.setSpdx(StaticHelper.readJsonFileToString(output.toFile()));
+                result.setSpdx(StaticHelper.readJsonFileToString(spdxOutput.toFile()));
+                result.setCdx(StaticHelper.readJsonFileToString(cdxOutput.toFile()));
                 result.setOrig_spdx(true);
                 result.setOrig_cdx(false);
 

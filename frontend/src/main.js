@@ -25,6 +25,7 @@ import TabMenu from 'primevue/tabmenu';
 import InputSwitch from "primevue/inputswitch";
 import Dialog from 'primevue/dialog';
 import Tooltip from 'primevue/tooltip';
+import Badge from "primevue/badge";
 
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -61,6 +62,7 @@ app.component("p-chip", Chip)
 app.component("p-tabMenu", TabMenu)
 app.component("p-dialog", Dialog)
 app.component("p-inputSwitch", InputSwitch)
+app.component("p-badge", Badge)
 
 app.directive('p-tooltip', Tooltip)
 

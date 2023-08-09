@@ -2,8 +2,10 @@ package org.mariuxdeangelo.masterthesis.generators;
 
 import org.kohsuke.github.GHRelease;
 import org.mariuxdeangelo.masterthesis.database.DatabaseTableDAO;
+import org.mariuxdeangelo.masterthesis.database.DatabaseViewDAO;
 import org.mariuxdeangelo.masterthesis.database.modelsDatabase.SbomFilesModel;
 import org.mariuxdeangelo.masterthesis.database.modelsDatabase.SubjectProjectModel;
+import org.mariuxdeangelo.masterthesis.database.modelsView.SbomMetadataViewModel;
 import org.mariuxdeangelo.masterthesis.generators.generators.*;
 import org.mariuxdeangelo.masterthesis.generators.generators.interfaces.Generator;
 import org.slf4j.Logger;
@@ -17,7 +19,7 @@ public class RunnerGenerator implements Runnable {
 
     private final SubjectProjectModel subjectProject;
 
-    public static final List<SbomFilesModel> existingSbomList = new DatabaseTableDAO().retrieveListOfSbomFilesLite();
+    public static final List<SbomMetadataViewModel> existingSbomList = new DatabaseViewDAO().retrieveSbomMetadata();
 
     public static final Logger logger = LoggerFactory.getLogger(RunnerGenerator.class);
 
@@ -56,13 +58,13 @@ public class RunnerGenerator implements Runnable {
         String activeSource = GeneratorAppConfig.getGeneratorListSource();
         if (subjectProject.getGit() != null && !activeSource.isBlank()) {
             logger.info("Project {}: Sources Scanner werden hinzugefügt.", subjectProject.getName());
-//            Path sourcesPath = RetrieveSubjects.retrieveSources(subjectProject.getGit(), subjectProject.getName());
-//            if (activeSource.contains("syft")) generatorList.add(new SyftGeneratorSources(sourcesPath, subjectProject.getProjectId()));
-//            if (activeSource.contains("trivy")) generatorList.add(new TrivyGeneratorSources(sourcesPath, subjectProject.getProjectId()));
-//            if (activeSource.contains("cdxgen")) generatorList.add(new CycloneDxGeneratorSources(sourcesPath, subjectProject.getProjectId()));
+            Path sourcesPath = RetrieveSubjects.retrieveSources(subjectProject.getGit(), subjectProject.getName());
+            if (activeSource.contains("syft")) generatorList.add(new SyftGeneratorSources(sourcesPath, subjectProject.getProjectId()));
+            if (activeSource.contains("trivy")) generatorList.add(new TrivyGeneratorSources(sourcesPath, subjectProject.getProjectId()));
+            if (activeSource.contains("cdxgen")) generatorList.add(new CycloneDxGeneratorSources(sourcesPath, subjectProject.getProjectId()));
             if (activeSource.contains("github")) generatorList.add(new GithubGeneratorSources(subjectProject.getGit(), subjectProject.getProjectId()));
-//            if (activeSource.contains("microsoft")) generatorList.add(new MicrosoftGeneratorSources(sourcesPath, subjectProject.getProjectId()));
-//            if (activeSource.contains("scancode")) generatorList.add(new ScanCodeGeneratorSources(sourcesPath, subjectProject.getProjectId()));
+            if (activeSource.contains("microsoft")) generatorList.add(new MicrosoftGeneratorSources(sourcesPath, subjectProject.getProjectId()));
+            if (activeSource.contains("scancode")) generatorList.add(new ScanCodeGeneratorSources(sourcesPath, subjectProject.getProjectId()));
         }
 
         logger.info("Project {}: {} Generators added", subjectProject.getName(), generatorList.size());
@@ -70,9 +72,10 @@ public class RunnerGenerator implements Runnable {
         for (Generator generator : generatorList) {
             try {
                 boolean exists = existingSbomList.stream().anyMatch(g ->
-                        g.getGenerator().equals(generator.generatorName()) &&
-                                g.getMode().equals(generator.generatorMode()) &&
-                                g.getProjectId() == subjectProject.getProjectId());
+                        g.getGenerator().equals(generator.generatorName()) && // compare generator
+                        g.getMode().equals(generator.generatorMode()) &&      // compare mode
+                        g.getProject_id() == subjectProject.getProjectId() && // compare project id
+                        (g.isSpdx_exists() || g.isCdx_exists()));             // compare if sboms exist
 
                 // Check if regenerationof existing SBOMs is enabled
                 if (exists && !GeneratorAppConfig.isRunRegenerateExistingSbom()) {

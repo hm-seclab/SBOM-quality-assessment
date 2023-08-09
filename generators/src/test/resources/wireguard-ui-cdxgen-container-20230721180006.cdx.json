@@ -1,0 +1,749 @@
+{
+  "version" : 1,
+  "metadata" : {
+    "tools" : [ {
+      "name" : "cdxgen",
+      "vendor" : "cyclonedx",
+      "version" : "9.2.2"
+    } ],
+    "authors" : [ {
+      "name" : "Prabhu Subramanian",
+      "email" : "prabhu@appthreat.com"
+    } ],
+    "component" : {
+      "name" : "ngoduykhanh/wireguard-ui",
+      "purl" : "pkg:oci/ngoduykhanh/wireguard-ui@sha256:8c79c1379c4e09ee9acf26d55c1f9eab2e8762c94b313be54bbb76fc47c0e5f0",
+      "type" : "container",
+      "version" : "latest",
+      "components" : [ ]
+    },
+    "timestamp" : "2023-07-21T18:00:05.115Z",
+    "properties" : [ {
+      "name" : "oci:image:Id",
+      "value" : "sha256:f1a3e6248d46dacafa80d1d45368bc4ef851549ed5d6ca73de82430414eba909"
+    }, {
+      "name" : "oci:image:RepoTag",
+      "value" : "ngoduykhanh/wireguard-ui:latest"
+    }, {
+      "name" : "oci:image:RepoDigest",
+      "value" : "ngoduykhanh/wireguard-ui@sha256:8c79c1379c4e09ee9acf26d55c1f9eab2e8762c94b313be54bbb76fc47c0e5f0"
+    }, {
+      "name" : "oci:image:Created",
+      "value" : "2023-06-23T07:44:58.093755544Z"
+    }, {
+      "name" : "oci:image:Architecture",
+      "value" : "amd64"
+    }, {
+      "name" : "oci:image:Os",
+      "value" : "linux"
+    }, {
+      "name" : "oci:image:manifest:Config",
+      "value" : "f1a3e6248d46dacafa80d1d45368bc4ef851549ed5d6ca73de82430414eba909.json"
+    }, {
+      "name" : "oci:image:manifest:Layers",
+      "value" : "6f2e4e79e109838b8d685efa6f2584efbb160832af147a215d86370dc1d454b3/layer.tar\\nc66861cdbded77a1d9954c18f0a471e3822b4f473d8b898176c29181a5c1ce6a/layer.tar\\nced1b35736a068b13aa19f98a17617ab8be88c64d96999e2ff53eefe59254517/layer.tar\\ndc7abdabfe609cee2e7792246f84a88e95e2211b6e882051befcf9909d44028b/layer.tar\\n487255795a9ed0d106c390ae9131f6bb2e18ff43d8ded670bd58e3242c924e5f/layer.tar\\nf559aad9767d6597dcf81e8516310817f4d856b3c4e24e2ad1a521927b9b45e1/layer.tar\\n90a43fa82e94a933e866c7e66e6f43c39898f04ceadfe6cec0c283f76ea8a206/layer.tar\\n4034d90694ffa214370ff971c927b925727c29054d9fdafaff4101beaeca603c/layer.tar"
+    }, {
+      "name" : "oci:image:lastLayer:Id",
+      "value" : "4034d90694ffa214370ff971c927b925727c29054d9fdafaff4101beaeca603c"
+    }, {
+      "name" : "oci:image:lastLayer:ParentId",
+      "value" : "90a43fa82e94a933e866c7e66e6f43c39898f04ceadfe6cec0c283f76ea8a206"
+    }, {
+      "name" : "oci:image:lastLayer:Created",
+      "value" : "2023-06-23T07:44:58.093755544Z"
+    }, {
+      "name" : "oci:image:lastLayer:Env",
+      "value" : "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    }, {
+      "name" : "oci:image:componentTypes",
+      "value" : "rpm"
+    } ]
+  },
+  "services" : [ ],
+  "bomFormat" : "CycloneDX",
+  "components" : [ {
+    "name" : "alpine-baselayout",
+    "purl" : "pkg:rpm/alpine-baselayout@3.2.0-r23",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/alpine-baselayout@3.2.0-r23",
+    "version" : "3.2.0-r23",
+    "licenses" : [ {
+      "expression" : "GPL-2.0"
+    } ]
+  }, {
+    "name" : "alpine-baselayout-data",
+    "purl" : "pkg:rpm/alpine-baselayout-data@3.2.0-r23",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/alpine-baselayout-data@3.2.0-r23",
+    "version" : "3.2.0-r23",
+    "licenses" : [ {
+      "expression" : "GPL-2.0"
+    } ]
+  }, {
+    "name" : "alpine-keys",
+    "purl" : "pkg:rpm/alpine-keys@2.4-r1",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/alpine-keys@2.4-r1",
+    "version" : "2.4-r1",
+    "licenses" : [ {
+      "expression" : "MIT"
+    } ]
+  }, {
+    "name" : "apk-tools",
+    "purl" : "pkg:rpm/apk-tools@2.12.9-r3",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/apk-tools@2.12.9-r3",
+    "version" : "2.12.9-r3",
+    "licenses" : [ {
+      "expression" : "GPL-2.0"
+    } ]
+  }, {
+    "name" : "bash",
+    "purl" : "pkg:rpm/bash@5.1.16-r2",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/bash@5.1.16-r2",
+    "version" : "5.1.16-r2",
+    "licenses" : [ {
+      "expression" : "GPL-3.0"
+    } ]
+  }, {
+    "name" : "busybox",
+    "purl" : "pkg:rpm/busybox@1.35.0-r17",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/busybox@1.35.0-r17",
+    "version" : "1.35.0-r17",
+    "licenses" : [ {
+      "expression" : "GPL-2.0"
+    } ]
+  }, {
+    "name" : "ca-certificates",
+    "purl" : "pkg:rpm/ca-certificates@20230506-r0",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/ca-certificates@20230506-r0",
+    "version" : "20230506-r0",
+    "licenses" : [ {
+      "expression" : "MPL-2.0"
+    } ]
+  }, {
+    "name" : "ca-certificates-bundle",
+    "purl" : "pkg:rpm/ca-certificates-bundle@20230506-r0",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/ca-certificates-bundle@20230506-r0",
+    "version" : "20230506-r0",
+    "licenses" : [ {
+      "expression" : "MPL-2.0"
+    } ]
+  }, {
+    "name" : "fts",
+    "purl" : "pkg:rpm/fts@1.2.7-r1",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/fts@1.2.7-r1",
+    "version" : "1.2.7-r1",
+    "licenses" : [ {
+      "expression" : "BSD-3-Clause"
+    } ]
+  }, {
+    "name" : "ip6tables",
+    "purl" : "pkg:rpm/ip6tables@1.8.8-r1",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/ip6tables@1.8.8-r1",
+    "version" : "1.8.8-r1",
+    "licenses" : [ {
+      "expression" : "GPL-2.0"
+    } ]
+  }, {
+    "name" : "iptables",
+    "purl" : "pkg:rpm/iptables@1.8.8-r1",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/iptables@1.8.8-r1",
+    "version" : "1.8.8-r1",
+    "licenses" : [ {
+      "expression" : "GPL-2.0"
+    } ]
+  }, {
+    "name" : "iproute2",
+    "purl" : "pkg:rpm/iproute2@5.17.0-r0",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/iproute2@5.17.0-r0",
+    "version" : "5.17.0-r0",
+    "licenses" : [ {
+      "expression" : "GPL-2.0"
+    } ]
+  }, {
+    "name" : "iproute2-minimal",
+    "purl" : "pkg:rpm/iproute2-minimal@5.17.0-r0",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/iproute2-minimal@5.17.0-r0",
+    "version" : "5.17.0-r0",
+    "licenses" : [ {
+      "expression" : "GPL-2.0"
+    } ]
+  }, {
+    "name" : "iproute2-ss",
+    "purl" : "pkg:rpm/iproute2-ss@5.17.0-r0",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/iproute2-ss@5.17.0-r0",
+    "version" : "5.17.0-r0",
+    "licenses" : [ {
+      "expression" : "GPL-2.0"
+    } ]
+  }, {
+    "name" : "iproute2-tc",
+    "purl" : "pkg:rpm/iproute2-tc@5.17.0-r0",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/iproute2-tc@5.17.0-r0",
+    "version" : "5.17.0-r0",
+    "licenses" : [ {
+      "expression" : "GPL-2.0"
+    } ]
+  }, {
+    "name" : "jq",
+    "purl" : "pkg:rpm/jq@1.6-r1",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/jq@1.6-r1",
+    "version" : "1.6-r1",
+    "licenses" : [ {
+      "expression" : "MIT"
+    } ]
+  }, {
+    "name" : "libbz2",
+    "purl" : "pkg:rpm/libbz2@1.0.8-r1",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/libbz2@1.0.8-r1",
+    "version" : "1.0.8-r1",
+    "licenses" : [ {
+      "expression" : "bzip2-1.0.6"
+    } ]
+  }, {
+    "name" : "bzip2",
+    "purl" : "pkg:rpm/bzip2@1.0.8-r1",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/bzip2@1.0.8-r1",
+    "version" : "1.0.8-r1",
+    "licenses" : [ {
+      "expression" : "bzip2-1.0.6"
+    } ]
+  }, {
+    "name" : "libc-utils",
+    "purl" : "pkg:rpm/libc-utils@0.7.2-r3",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/libc-utils@0.7.2-r3",
+    "version" : "0.7.2-r3",
+    "licenses" : [ {
+      "expression" : "BSD-2-Clause"
+    } ]
+  }, {
+    "name" : "libc-dev",
+    "purl" : "pkg:rpm/libc-dev@0.7.2-r3",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/libc-dev@0.7.2-r3",
+    "version" : "0.7.2-r3",
+    "licenses" : [ {
+      "expression" : "BSD-2-Clause"
+    } ]
+  }, {
+    "name" : "libcap",
+    "purl" : "pkg:rpm/libcap@2.64-r1",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/libcap@2.64-r1",
+    "version" : "2.64-r1",
+    "licenses" : [ {
+      "expression" : "BSD-3-Clause"
+    } ]
+  }, {
+    "name" : "libcrypto1.1",
+    "purl" : "pkg:rpm/libcrypto1.1@1.1.1u-r1",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/libcrypto1.1@1.1.1u-r1",
+    "version" : "1.1.1u-r1",
+    "licenses" : [ {
+      "expression" : "OpenSSL"
+    } ]
+  }, {
+    "name" : "openssl",
+    "purl" : "pkg:rpm/openssl@1.1.1u-r1",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/openssl@1.1.1u-r1",
+    "version" : "1.1.1u-r1",
+    "licenses" : [ {
+      "expression" : "OpenSSL"
+    } ]
+  }, {
+    "name" : "libelf",
+    "purl" : "pkg:rpm/libelf@0.186-r0",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/libelf@0.186-r0",
+    "version" : "0.186-r0",
+    "licenses" : [ {
+      "expression" : "GPL-3.0"
+    } ]
+  }, {
+    "name" : "elfutils",
+    "purl" : "pkg:rpm/elfutils@0.186-r0",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/elfutils@0.186-r0",
+    "version" : "0.186-r0",
+    "licenses" : [ {
+      "expression" : "GPL-3.0"
+    } ]
+  }, {
+    "name" : "libmnl",
+    "purl" : "pkg:rpm/libmnl@1.0.5-r0",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/libmnl@1.0.5-r0",
+    "version" : "1.0.5-r0",
+    "licenses" : [ {
+      "expression" : "LGPL-2.1-or-later"
+    } ]
+  }, {
+    "name" : "libnftnl",
+    "purl" : "pkg:rpm/libnftnl@1.2.3-r0",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/libnftnl@1.2.3-r0",
+    "version" : "1.2.3-r0",
+    "licenses" : [ {
+      "expression" : "GPL-2.0"
+    } ]
+  }, {
+    "name" : "libssl1.1",
+    "purl" : "pkg:rpm/libssl1.1@1.1.1u-r1",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/libssl1.1@1.1.1u-r1",
+    "version" : "1.1.1u-r1",
+    "licenses" : [ {
+      "expression" : "OpenSSL"
+    } ]
+  }, {
+    "name" : "musl",
+    "purl" : "pkg:rpm/musl@1.2.3-r3",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/musl@1.2.3-r3",
+    "version" : "1.2.3-r3",
+    "licenses" : [ {
+      "expression" : "MIT"
+    } ]
+  }, {
+    "name" : "musl-utils",
+    "purl" : "pkg:rpm/musl-utils@1.2.3-r3",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/musl-utils@1.2.3-r3",
+    "version" : "1.2.3-r3",
+    "licenses" : [ {
+      "expression" : "MIT"
+    } ]
+  }, {
+    "name" : "ncurses-libs",
+    "purl" : "pkg:rpm/ncurses-libs@6.3_p20220521-r1",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/ncurses-libs@6.3_p20220521-r1",
+    "version" : "6.3_p20220521-r1",
+    "licenses" : [ {
+      "expression" : "MIT"
+    } ]
+  }, {
+    "name" : "ncurses",
+    "purl" : "pkg:rpm/ncurses@6.3_p20220521-r1",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/ncurses@6.3_p20220521-r1",
+    "version" : "6.3_p20220521-r1",
+    "licenses" : [ {
+      "expression" : "MIT"
+    } ]
+  }, {
+    "name" : "ncurses-terminfo-base",
+    "purl" : "pkg:rpm/ncurses-terminfo-base@6.3_p20220521-r1",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/ncurses-terminfo-base@6.3_p20220521-r1",
+    "version" : "6.3_p20220521-r1",
+    "licenses" : [ {
+      "expression" : "MIT"
+    } ]
+  }, {
+    "name" : "oniguruma",
+    "purl" : "pkg:rpm/oniguruma@6.9.8-r0",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/oniguruma@6.9.8-r0",
+    "version" : "6.9.8-r0",
+    "licenses" : [ {
+      "expression" : "BSD-2-Clause"
+    } ]
+  }, {
+    "name" : "openresolv",
+    "purl" : "pkg:rpm/openresolv@3.12.0-r0",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/openresolv@3.12.0-r0",
+    "version" : "3.12.0-r0",
+    "licenses" : [ {
+      "expression" : "BSD-2-Clause"
+    } ]
+  }, {
+    "name" : "readline",
+    "purl" : "pkg:rpm/readline@8.1.2-r0",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/readline@8.1.2-r0",
+    "version" : "8.1.2-r0",
+    "licenses" : [ {
+      "expression" : "GPL-2.0"
+    } ]
+  }, {
+    "name" : "scanelf",
+    "purl" : "pkg:rpm/scanelf@1.3.4-r0",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/scanelf@1.3.4-r0",
+    "version" : "1.3.4-r0",
+    "licenses" : [ {
+      "expression" : "GPL-2.0"
+    } ]
+  }, {
+    "name" : "pax-utils",
+    "purl" : "pkg:rpm/pax-utils@1.3.4-r0",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/pax-utils@1.3.4-r0",
+    "version" : "1.3.4-r0",
+    "licenses" : [ {
+      "expression" : "GPL-2.0"
+    } ]
+  }, {
+    "name" : "ssl_client",
+    "purl" : "pkg:rpm/ssl_client@1.35.0-r17",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/ssl_client@1.35.0-r17",
+    "version" : "1.35.0-r17",
+    "licenses" : [ {
+      "expression" : "GPL-2.0"
+    } ]
+  }, {
+    "name" : "wireguard-tools",
+    "purl" : "pkg:rpm/wireguard-tools@1.0.20210914-r0",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/wireguard-tools@1.0.20210914-r0",
+    "version" : "1.0.20210914-r0",
+    "licenses" : [ {
+      "expression" : "GPL-2.0"
+    } ]
+  }, {
+    "name" : "wireguard-tools-wg",
+    "purl" : "pkg:rpm/wireguard-tools-wg@1.0.20210914-r0",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/wireguard-tools-wg@1.0.20210914-r0",
+    "version" : "1.0.20210914-r0",
+    "licenses" : [ {
+      "expression" : "GPL-2.0"
+    } ]
+  }, {
+    "name" : "wireguard-tools-wg-quick",
+    "purl" : "pkg:rpm/wireguard-tools-wg-quick@1.0.20210914-r0",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/wireguard-tools-wg-quick@1.0.20210914-r0",
+    "version" : "1.0.20210914-r0",
+    "licenses" : [ {
+      "expression" : "GPL-2.0"
+    } ]
+  }, {
+    "name" : "xz-libs",
+    "purl" : "pkg:rpm/xz-libs@5.2.5-r1",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/xz-libs@5.2.5-r1",
+    "version" : "5.2.5-r1",
+    "licenses" : [ {
+      "expression" : "GPL-2.0"
+    } ]
+  }, {
+    "name" : "xz",
+    "purl" : "pkg:rpm/xz@5.2.5-r1",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/xz@5.2.5-r1",
+    "version" : "5.2.5-r1",
+    "licenses" : [ {
+      "expression" : "GPL-2.0"
+    } ]
+  }, {
+    "name" : "zlib",
+    "purl" : "pkg:rpm/zlib@1.2.12-r3",
+    "type" : "library",
+    "group" : "",
+    "bom-ref" : "pkg:rpm/zlib@1.2.12-r3",
+    "version" : "1.2.12-r3",
+    "licenses" : [ {
+      "expression" : "Zlib"
+    } ]
+  }, {
+    "name" : "jwt-go",
+    "purl" : "pkg:golang/github.com/dgrijalva/jwt-go@v3.2.0+incompatible",
+    "type" : "library",
+    "group" : "github.com/dgrijalva",
+    "bom-ref" : "pkg:golang/github.com/dgrijalva/jwt-go@v3.2.0+incompatible",
+    "version" : "v3.2.0+incompatible"
+  }, {
+    "name" : "go-external-ip",
+    "purl" : "pkg:golang/github.com/glendc/go-external-ip@v0.0.0-20170425150139-139229dcdddd",
+    "type" : "library",
+    "group" : "github.com/glendc",
+    "bom-ref" : "pkg:golang/github.com/glendc/go-external-ip@v0.0.0-20170425150139-139229dcdddd",
+    "version" : "v0.0.0-20170425150139-139229dcdddd"
+  }, {
+    "name" : "locales",
+    "purl" : "pkg:golang/github.com/go-playground/locales@v0.13.0",
+    "type" : "library",
+    "group" : "github.com/go-playground",
+    "bom-ref" : "pkg:golang/github.com/go-playground/locales@v0.13.0",
+    "version" : "v0.13.0"
+  }, {
+    "name" : "universal-translator",
+    "purl" : "pkg:golang/github.com/go-playground/universal-translator@v0.17.0",
+    "type" : "library",
+    "group" : "github.com/go-playground",
+    "bom-ref" : "pkg:golang/github.com/go-playground/universal-translator@v0.17.0",
+    "version" : "v0.17.0"
+  }, {
+    "name" : "context",
+    "purl" : "pkg:golang/github.com/gorilla/context@v1.1.1",
+    "type" : "library",
+    "group" : "github.com/gorilla",
+    "bom-ref" : "pkg:golang/github.com/gorilla/context@v1.1.1",
+    "version" : "v1.1.1"
+  }, {
+    "name" : "securecookie",
+    "purl" : "pkg:golang/github.com/gorilla/securecookie@v1.1.1",
+    "type" : "library",
+    "group" : "github.com/gorilla",
+    "bom-ref" : "pkg:golang/github.com/gorilla/securecookie@v1.1.1",
+    "version" : "v1.1.1"
+  }, {
+    "name" : "sessions",
+    "purl" : "pkg:golang/github.com/gorilla/sessions@v1.2.0",
+    "type" : "library",
+    "group" : "github.com/gorilla",
+    "bom-ref" : "pkg:golang/github.com/gorilla/sessions@v1.2.0",
+    "version" : "v1.2.0"
+  }, {
+    "name" : "lumber",
+    "purl" : "pkg:golang/github.com/jcelliott/lumber@v0.0.0-20160324203708-dd349441af25",
+    "type" : "library",
+    "group" : "github.com/jcelliott",
+    "bom-ref" : "pkg:golang/github.com/jcelliott/lumber@v0.0.0-20160324203708-dd349441af25",
+    "version" : "v0.0.0-20160324203708-dd349441af25"
+  }, {
+    "name" : "native",
+    "purl" : "pkg:golang/github.com/josharian/native@v0.0.0-20200817173448-b6b71def0850",
+    "type" : "library",
+    "group" : "github.com/josharian",
+    "bom-ref" : "pkg:golang/github.com/josharian/native@v0.0.0-20200817173448-b6b71def0850",
+    "version" : "v0.0.0-20200817173448-b6b71def0850"
+  }, {
+    "name" : "echo-contrib",
+    "purl" : "pkg:golang/github.com/labstack/echo-contrib@v0.9.0",
+    "type" : "library",
+    "group" : "github.com/labstack",
+    "bom-ref" : "pkg:golang/github.com/labstack/echo-contrib@v0.9.0",
+    "version" : "v0.9.0"
+  }, {
+    "name" : "v4",
+    "purl" : "pkg:golang/github.com/labstack/echo/v4@v4.1.16",
+    "type" : "library",
+    "group" : "github.com/labstack/echo",
+    "bom-ref" : "pkg:golang/github.com/labstack/echo/v4@v4.1.16",
+    "version" : "v4.1.16"
+  }, {
+    "name" : "gommon",
+    "purl" : "pkg:golang/github.com/labstack/gommon@v0.3.0",
+    "type" : "library",
+    "group" : "github.com/labstack",
+    "bom-ref" : "pkg:golang/github.com/labstack/gommon@v0.3.0",
+    "version" : "v0.3.0"
+  }, {
+    "name" : "go-urn",
+    "purl" : "pkg:golang/github.com/leodido/go-urn@v1.2.0",
+    "type" : "library",
+    "group" : "github.com/leodido",
+    "bom-ref" : "pkg:golang/github.com/leodido/go-urn@v1.2.0",
+    "version" : "v1.2.0"
+  }, {
+    "name" : "go-colorable",
+    "purl" : "pkg:golang/github.com/mattn/go-colorable@v0.1.11",
+    "type" : "library",
+    "group" : "github.com/mattn",
+    "bom-ref" : "pkg:golang/github.com/mattn/go-colorable@v0.1.11",
+    "version" : "v0.1.11"
+  }, {
+    "name" : "go-isatty",
+    "purl" : "pkg:golang/github.com/mattn/go-isatty@v0.0.14",
+    "type" : "library",
+    "group" : "github.com/mattn",
+    "bom-ref" : "pkg:golang/github.com/mattn/go-isatty@v0.0.14",
+    "version" : "v0.0.14"
+  }, {
+    "name" : "genetlink",
+    "purl" : "pkg:golang/github.com/mdlayher/genetlink@v1.0.0",
+    "type" : "library",
+    "group" : "github.com/mdlayher",
+    "bom-ref" : "pkg:golang/github.com/mdlayher/genetlink@v1.0.0",
+    "version" : "v1.0.0"
+  }, {
+    "name" : "netlink",
+    "purl" : "pkg:golang/github.com/mdlayher/netlink@v1.4.0",
+    "type" : "library",
+    "group" : "github.com/mdlayher",
+    "bom-ref" : "pkg:golang/github.com/mdlayher/netlink@v1.4.0",
+    "version" : "v1.4.0"
+  }, {
+    "name" : "xid",
+    "purl" : "pkg:golang/github.com/rs/xid@v1.2.1",
+    "type" : "library",
+    "group" : "github.com/rs",
+    "bom-ref" : "pkg:golang/github.com/rs/xid@v1.2.1",
+    "version" : "v1.2.1"
+  }, {
+    "name" : "go-wol",
+    "purl" : "pkg:golang/github.com/sabhiram/go-wol@v0.0.0-20211224004021-c83b0c2f887d",
+    "type" : "library",
+    "group" : "github.com/sabhiram",
+    "bom-ref" : "pkg:golang/github.com/sabhiram/go-wol@v0.0.0-20211224004021-c83b0c2f887d",
+    "version" : "v0.0.0-20211224004021-c83b0c2f887d"
+  }, {
+    "name" : "scribble",
+    "purl" : "pkg:golang/github.com/sdomino/scribble@v0.0.0-20191024200645-4116320640ba",
+    "type" : "library",
+    "group" : "github.com/sdomino",
+    "bom-ref" : "pkg:golang/github.com/sdomino/scribble@v0.0.0-20191024200645-4116320640ba",
+    "version" : "v0.0.0-20191024200645-4116320640ba"
+  }, {
+    "name" : "rest",
+    "purl" : "pkg:golang/github.com/sendgrid/rest@v2.6.4+incompatible",
+    "type" : "library",
+    "group" : "github.com/sendgrid",
+    "bom-ref" : "pkg:golang/github.com/sendgrid/rest@v2.6.4+incompatible",
+    "version" : "v2.6.4+incompatible"
+  }, {
+    "name" : "sendgrid-go",
+    "purl" : "pkg:golang/github.com/sendgrid/sendgrid-go@v3.10.0+incompatible",
+    "type" : "library",
+    "group" : "github.com/sendgrid",
+    "bom-ref" : "pkg:golang/github.com/sendgrid/sendgrid-go@v3.10.0+incompatible",
+    "version" : "v3.10.0+incompatible"
+  }, {
+    "name" : "go-qrcode",
+    "purl" : "pkg:golang/github.com/skip2/go-qrcode@v0.0.0-20191027152451-9434209cb086",
+    "type" : "library",
+    "group" : "github.com/skip2",
+    "bom-ref" : "pkg:golang/github.com/skip2/go-qrcode@v0.0.0-20191027152451-9434209cb086",
+    "version" : "v0.0.0-20191027152451-9434209cb086"
+  }, {
+    "name" : "bytebufferpool",
+    "purl" : "pkg:golang/github.com/valyala/bytebufferpool@v1.0.0",
+    "type" : "library",
+    "group" : "github.com/valyala",
+    "bom-ref" : "pkg:golang/github.com/valyala/bytebufferpool@v1.0.0",
+    "version" : "v1.0.0"
+  }, {
+    "name" : "fasttemplate",
+    "purl" : "pkg:golang/github.com/valyala/fasttemplate@v1.1.0",
+    "type" : "library",
+    "group" : "github.com/valyala",
+    "bom-ref" : "pkg:golang/github.com/valyala/fasttemplate@v1.1.0",
+    "version" : "v1.1.0"
+  }, {
+    "name" : "v2",
+    "purl" : "pkg:golang/github.com/xhit/go-simple-mail/v2@v2.10.0",
+    "type" : "library",
+    "group" : "github.com/xhit/go-simple-mail",
+    "bom-ref" : "pkg:golang/github.com/xhit/go-simple-mail/v2@v2.10.0",
+    "version" : "v2.10.0"
+  }, {
+    "name" : "crypto",
+    "purl" : "pkg:golang/golang.org/x/crypto@v0.0.0-20210921155107-089bfa567519",
+    "type" : "library",
+    "group" : "golang.org/x",
+    "bom-ref" : "pkg:golang/golang.org/x/crypto@v0.0.0-20210921155107-089bfa567519",
+    "version" : "v0.0.0-20210921155107-089bfa567519"
+  }, {
+    "name" : "mod",
+    "purl" : "pkg:golang/golang.org/x/mod@v0.7.0",
+    "type" : "library",
+    "group" : "golang.org/x",
+    "bom-ref" : "pkg:golang/golang.org/x/mod@v0.7.0",
+    "version" : "v0.7.0"
+  }, {
+    "name" : "net",
+    "purl" : "pkg:golang/golang.org/x/net@v0.0.0-20220722155237-a158d28d115b",
+    "type" : "library",
+    "group" : "golang.org/x",
+    "bom-ref" : "pkg:golang/golang.org/x/net@v0.0.0-20220722155237-a158d28d115b",
+    "version" : "v0.0.0-20220722155237-a158d28d115b"
+  }, {
+    "name" : "sys",
+    "purl" : "pkg:golang/golang.org/x/sys@v0.0.0-20220722155257-8c9f86f7a55f",
+    "type" : "library",
+    "group" : "golang.org/x",
+    "bom-ref" : "pkg:golang/golang.org/x/sys@v0.0.0-20220722155257-8c9f86f7a55f",
+    "version" : "v0.0.0-20220722155257-8c9f86f7a55f"
+  }, {
+    "name" : "text",
+    "purl" : "pkg:golang/golang.org/x/text@v0.3.7",
+    "type" : "library",
+    "group" : "golang.org/x",
+    "bom-ref" : "pkg:golang/golang.org/x/text@v0.3.7",
+    "version" : "v0.3.7"
+  }, {
+    "name" : "wgctrl",
+    "purl" : "pkg:golang/golang.zx2c4.com/wireguard/wgctrl@v0.0.0-20210803171230-4253848d036c",
+    "type" : "library",
+    "group" : "golang.zx2c4.com/wireguard",
+    "bom-ref" : "pkg:golang/golang.zx2c4.com/wireguard/wgctrl@v0.0.0-20210803171230-4253848d036c",
+    "version" : "v0.0.0-20210803171230-4253848d036c"
+  }, {
+    "name" : "validator.v9",
+    "purl" : "pkg:golang/gopkg.in/go-playground/validator.v9@v9.31.0",
+    "type" : "library",
+    "group" : "gopkg.in/go-playground",
+    "bom-ref" : "pkg:golang/gopkg.in/go-playground/validator.v9@v9.31.0",
+    "version" : "v9.31.0"
+  } ],
+  "specVersion" : "1.4",
+  "dependencies" : [ ],
+  "serialNumber" : "urn:uuid:50996f1a-ca98-4f92-9b89-68ef869c0f47"
+}

@@ -24,8 +24,8 @@ public class TestGeneratorSources extends TestAbstractGenerator {
         Generator generator = new MicrosoftGeneratorSources(getTestSourcesPath(), 0);
 
         SbomFilesModel output = generator.generate();
-//        assert output.getCdx() != null;
-//        assert !output.getCdx().isEmpty();
+        assert output.getCdx() != null;
+        assert !output.getCdx().isEmpty();
         assert output.getSpdx() != null;
         assert !output.getSpdx().isEmpty();
         assert output.getShellOutput().length > 0;
@@ -36,8 +36,8 @@ public class TestGeneratorSources extends TestAbstractGenerator {
         Generator generator = new TrivyGeneratorSources(getTestSourcesPath(), 0);
 
         SbomFilesModel output = generator.generate();
-//        assert output.getCdx() != null;
-//        assert !output.getCdx().isEmpty();
+        assert output.getCdx() != null;
+        assert !output.getCdx().isEmpty();
         assert output.getSpdx() != null;
         assert !output.getSpdx().isEmpty();
         assert output.getShellOutput().length > 0;

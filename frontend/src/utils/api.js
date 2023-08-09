@@ -4,6 +4,18 @@ const cache = new Map()
 
 export const retrieveSbomMetadata = async () => {
     const endpoint = '/api/getSbomMetadata'
+    const result = await retrieveData(endpoint)
+
+    for (const item of result) {
+        if (!item.spdx_exists) {
+            item.status = 'failed'
+        } else if (item.totalPackages < 2) {
+            item.status = 'corrupted'
+        } else {
+            item.status = 'good'
+        }
+    }
+
     return retrieveData(endpoint)
 }
 
@@ -44,6 +56,26 @@ export const retrieveDependencyListByRefLoc = async (project_id) => {
 
 export const retrieveDependencyListByRefLocVersion = async (project_id) => {
     const endpoint = '/api/getDependencyListByRefLocVersion?project_id=' + project_id
+    return retrieveData(endpoint)
+}
+
+export const retrieveCdxDependencyListByName = async (project_id) => {
+    const endpoint = '/api/getCdxDependencyListByName?project_id=' + project_id
+    return retrieveData(endpoint)
+}
+
+export const retrieveCdxDependencyListByNameVersion = async (project_id) => {
+    const endpoint = '/api/getCdxDependencyListByNameVersion?project_id=' + project_id
+    return retrieveData(endpoint)
+}
+
+export const retrieveCdxDependencyListByPurl = async (project_id) => {
+    const endpoint = '/api/getCdxDependencyListByPurl?project_id=' + project_id
+    return retrieveData(endpoint)
+}
+
+export const retrieveCdxDependencyListByPurlVersion = async (project_id) => {
+    const endpoint = '/api/getCdxDependencyListByPurlVersion?project_id=' + project_id
     return retrieveData(endpoint)
 }
 

@@ -4,6 +4,7 @@ import {retrieveSbomMetadata} from "@/utils/api";
 import {onMounted, ref} from "vue";
 import Homebadge from "@/components/homebadge.vue";
 import Thumbnail from "@/components/thumbnail.vue";
+import Disclamer from "@/components/disclamer.vue";
 
 const projectList = ref([])
 const dataLoaded = ref(false);
@@ -63,6 +64,7 @@ async function fetchSubjectProjects() {
 <template>
   <thumbnail title="Home" :map="thumb"/>
   <div class="container">
+    <disclamer/>
     <div v-if="dataLoaded === false" style="margin-top: 12px">
       <p-skeleton class="mb-2" height="160px"/>
       <p-skeleton v-for="index in 30" class="mb-2" height="40px"/>

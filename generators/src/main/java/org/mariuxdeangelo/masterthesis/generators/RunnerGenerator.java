@@ -33,8 +33,6 @@ public class RunnerGenerator implements Runnable {
 
         String activeContainer = GeneratorAppConfig.getGeneratorListContainer();
         if (subjectProject.getContainer() != null && !activeContainer.isBlank()) {
-            if (subjectProject.getContainer().contains(":"))
-                subjectProject.setContainer(subjectProject.getContainer() + ":latest");
             logger.info("Project {}: Container Scanner werden hinzugefügt.", subjectProject.getName());
             RetrieveSubjects.retrieveContainer(subjectProject.getContainer());
             if (activeContainer.contains("syft")) generatorList.add(new SyftGeneratorContainer(subjectProject.getContainer(), subjectProject.getProjectId()));
@@ -45,18 +43,20 @@ public class RunnerGenerator implements Runnable {
         }
 
         String activeRelease = GeneratorAppConfig.getGeneratorListrelease();
-        GHRelease release = RetrieveSubjects.isReleaseAvailible(subjectProject.getGit(), subjectProject.getName());
-        if (release != null && activeRelease != null) {
-            logger.info("Project {}: release Scanner werden hinzugefügt.", subjectProject.getName());
-            Path releasePath = RetrieveSubjects.retrieveRelease(release, subjectProject.getName());
-            if (activeRelease.contains("syft")) generatorList.add(new SyftGeneratorRelease(releasePath, subjectProject.getProjectId()));
-            if (activeRelease.contains("microsoft")) generatorList.add(new MicrosoftGeneratorRelease(releasePath, subjectProject.getProjectId()));
-            if (activeRelease.contains("trivy")) generatorList.add(new TrivyGeneratorRelease(releasePath, subjectProject.getProjectId()));
-            if (activeRelease.contains("cdxgen")) generatorList.add(new CycloneDxGeneratorRelease(releasePath, subjectProject.getProjectId()));
+        if (!activeRelease.isEmpty()) {
+            GHRelease release = RetrieveSubjects.isReleaseAvailible(subjectProject.getGit(), subjectProject.getName());
+            if (release != null) {
+                logger.info("Project {}: release Scanner werden hinzugefügt.", subjectProject.getName());
+                Path releasePath = RetrieveSubjects.retrieveRelease(release, subjectProject.getName());
+                if (activeRelease.contains("syft")) generatorList.add(new SyftGeneratorRelease(releasePath, subjectProject.getProjectId()));
+                if (activeRelease.contains("microsoft")) generatorList.add(new MicrosoftGeneratorRelease(releasePath, subjectProject.getProjectId()));
+                if (activeRelease.contains("trivy")) generatorList.add(new TrivyGeneratorRelease(releasePath, subjectProject.getProjectId()));
+                if (activeRelease.contains("cdxgen")) generatorList.add(new CycloneDxGeneratorRelease(releasePath, subjectProject.getProjectId()));
+            }
         }
 
         String activeSource = GeneratorAppConfig.getGeneratorListSource();
-        if (subjectProject.getGit() != null && !activeSource.isBlank()) {
+        if (subjectProject.getGit() != null && !activeSource.isEmpty()) {
             logger.info("Project {}: Sources Scanner werden hinzugefügt.", subjectProject.getName());
             Path sourcesPath = RetrieveSubjects.retrieveSources(subjectProject.getGit(), subjectProject.getName());
             if (activeSource.contains("syft")) generatorList.add(new SyftGeneratorSources(sourcesPath, subjectProject.getProjectId()));

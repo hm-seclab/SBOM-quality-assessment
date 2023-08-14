@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -42,8 +43,9 @@ public class GeneratorApplication {
     private static void runGenerators() {
         List<SubjectProjectModel> subjectProjectList = StaticHelper.getDatabaseTableDAO().retrieveListOfSubjectProjects();
 
+//        Collections.reverse(subjectProjectList);
         for (SubjectProjectModel subject : subjectProjectList) {
-//            if (subject.getProjectId() != 148) continue;
+            if (subject.getProjectId() < 127) continue;
             RunnerGenerator generatorRunner = new RunnerGenerator(subject);
             logger.info("Add new Project to ExecuterService: {} {}", subject.getName(), subject.getProjectId());
 
@@ -68,15 +70,4 @@ public class GeneratorApplication {
             futures.add(threadPool.submit(consumer));
         }
     }
-
-    private static void killDeadTasks() {
-        for (Future<?> future : futures) {
-            try {
-                future.get(1, TimeUnit.HOURS);
-            } catch (ExecutionException | InterruptedException | TimeoutException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
 }

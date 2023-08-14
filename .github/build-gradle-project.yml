@@ -1,0 +1,22 @@
+name: Build and run Java 17 Gradle project
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+
+      - name: Build project with Gradle
+        run: ./gradlew build

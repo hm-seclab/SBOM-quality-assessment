@@ -17,9 +17,9 @@ const showDisclamer = ref(true)
     </template>
     <template #footer>
       <div class="flex justify-content-end">
-        <a href="" target="_blank">
-          <p-button label="HowTo" icon="pi pi-book" severity="secondary" outlined rounded/>
-        </a>
+<!--        <a href="" target="_blank">-->
+<!--          <p-button label="HowTo" icon="pi pi-book" severity="secondary" outlined rounded/>-->
+<!--        </a>-->
 
         <a href="https://github.com/hm-seclab/SBOM-quality-assessment" target="_blank">
           <p-button label="Github" icon="pi pi-github" severity="secondary" class="ml-2" outlined rounded/>

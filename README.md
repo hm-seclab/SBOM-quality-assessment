@@ -2,6 +2,8 @@
 
 This is the repository behind the website https://sbom.seclab.cs.hm.edu/
 
+### Due to maintinance work on the universitys power grid the SBOM quality assessment is offline over the weekend between 1. of september and 4. of september.
+
 This project is part of a research project for a master's thesis at the University of Applied Sciences Munich in the [HM-Seclab](https://seclab.cs.hm.edu/). Feel free to reach out at mbiebel[at].hm.edu or hit me up on Mastodon at [@mariuxdeangelo@infosec.exchange](https://infosec.exchange/@mariuxdeangelo).
 
 I'm currently work a lot together with the awesome people from the [OpenSSF SBOM Everywhere Working Group](https://github.com/ossf/sbom-everywhere). You can find me in there bi-weekly meetings. We are always happy for people to join.

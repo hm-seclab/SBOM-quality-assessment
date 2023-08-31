@@ -34,7 +34,7 @@ public class MicrosoftGeneratorSources extends GeneratorSources {
 
         SbomFilesModel result = new SbomFilesModel();
         StaticHelper.moveMicrosoftFilesAccordingly(outputDir, spdxOutput);
-        StaticHelper.convertSpdx2Cdx(spdxOutput.toFile(), cdxOutput.toFile());
+        StaticHelper.convertSpdx2CdxWithSyft(spdxOutput.toFile(), cdxOutput.toFile());
         result.setProjectId(getProjectId());
         result.setExecutionTime(executionTime);
         result.setGenerator(generatorName());

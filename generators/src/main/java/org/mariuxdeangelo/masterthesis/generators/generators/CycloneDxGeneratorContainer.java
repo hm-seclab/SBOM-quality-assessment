@@ -30,7 +30,7 @@ public class CycloneDxGeneratorContainer extends GeneratorContainer {
         String command = String.format("cdxgen %s --deep --spec-version 1.4 -o %s -t docker", getContainer(), cdxOutput);
         long executionTime = CommandExecuter.executeRecorded(command, castOutput);
 
-        StaticHelper.convertCdx2Spdx(cdxOutput.toFile(), spdxOutput.toFile());
+        StaticHelper.convertCdx2SpdxWithSyft(cdxOutput.toFile(), spdxOutput.toFile());
         SbomFilesModel result = new SbomFilesModel();
         result.setProjectId(getProjectId());
         result.setExecutionTime(executionTime);

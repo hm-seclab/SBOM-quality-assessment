@@ -50,7 +50,7 @@ public class GithubGeneratorSources extends GeneratorSources {
                 FileWriter fileWriter = new FileWriter(spdxOutput.toFile());
                 fileWriter.write(jsonNode.get("sbom").toPrettyString());
                 fileWriter.close();
-                StaticHelper.convertSpdx2Cdx(spdxOutput.toFile(), cdxOutput.toFile());
+                StaticHelper.convertSpdx2CdxWithSyft(spdxOutput.toFile(), cdxOutput.toFile());
 
                 SbomFilesModel result = new SbomFilesModel();
                 result.setProjectId(getProjectId());

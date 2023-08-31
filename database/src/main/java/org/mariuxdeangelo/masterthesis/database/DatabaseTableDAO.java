@@ -40,7 +40,7 @@ public class DatabaseTableDAO extends AbstractPostgresDAO{
     }
 
     public List<SbomFilesModel> retrieveListOfSbomFilesLite() {
-        String sql = "SELECT sbom_file_id, project_id, generator, mode, timestamp FROM sbom_files";
+        String sql = "SELECT sbom_file_id, project_id, generator, mode, timestamp, spdx_orig, cdx_orig FROM sbom_files";
         return jdbcTemplate.query(sql, new SbomFilesDatabaseRowMapper());
     }
 

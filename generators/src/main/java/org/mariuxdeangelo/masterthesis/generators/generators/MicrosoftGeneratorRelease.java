@@ -33,7 +33,7 @@ public class MicrosoftGeneratorRelease extends GeneratorRelease {
         long executionTime = CommandExecuter.executeRecorded(command, castOutput);
 
         StaticHelper.moveMicrosoftFilesAccordingly(outputDir, spdxOutput);
-        StaticHelper.convertSpdx2Cdx(spdxOutput.toFile(), cdxOutput.toFile());
+        StaticHelper.convertSpdx2CdxWithSyft(spdxOutput.toFile(), cdxOutput.toFile());
         SbomFilesModel result = new SbomFilesModel();
         result.setProjectId(getProjectId());
         result.setExecutionTime(executionTime);
